@@ -1,0 +1,123 @@
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f5;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1f2937;
+    color: white;
+    padding: 10px 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.topnav .brand a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.logout-btn {
+    background-color: #ef4444;
+    border: none;
+    padding: 8px 16px;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+      width: 150px;
+      background-color: #111827;
+      color: #d1d5db;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+.sidebar-header {
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #f9fafb;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+}
+
+.sidebar-menu li {
+    margin: 10px 0;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    color: #e5e7eb;
+}
+
+.sidebar-menu a:hover {
+    background-color: #374151;
+    color: #c23030;
+}
+
+.sidebar-footer {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #f9fafb;
+}
+
+.page-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 30px;
+    margin-top: 10px;
+}
+
+.footer {
+    position: flex;
+    padding: 5px;
+    background-color: #111827;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+
+.footer a {
+    color: #4b5563;
+    margin: 0 4px;
+}
+
+
