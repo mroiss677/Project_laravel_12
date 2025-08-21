@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kategoris = Kategori::all();
+        $query = Kategori::query();
+
+        // 🔍 Tambahkan fitur pencarian kategori (opsional)
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
+
+        $kategoris = $query->latest()->get();
+
         return view('kategori.index', compact('kategoris'));
     }
 

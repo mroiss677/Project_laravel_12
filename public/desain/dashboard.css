@@ -1,6 +1,6 @@
 body {
-    height: 100%;
     margin: 0;
+    min-height: 100vh;
     font-family: 'Segoe UI', sans-serif;
     background-color: #f4f4f5;
     color: #333;
@@ -11,6 +11,7 @@ a {
     color: inherit;
 }
 
+/* Navbar */
 .topnav {
     display: flex;
     justify-content: space-between;
@@ -27,34 +28,25 @@ a {
     color: #ffffff;
 }
 
-.logout-btn {
-    background-color: #ef4444;
-    border: none;
-    padding: 8px 16px;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
+/* Layout */
 .layout {
     display: flex;
-    min-height: 100vh;
+    min-height: calc(100vh - 50px); /* sisakan ruang untuk footer */
 }
 
 .sidebar {
-      width: 150px;
-      background-color: #111827;
-      color: #d1d5db;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px;
-    }
+    width: 180px;
+    background-color: #111827;
+    color: #d1d5db;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
 
 .sidebar-header {
     font-size: 1rem;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: bold;
     color: #f9fafb;
 }
@@ -62,40 +54,43 @@ a {
 .sidebar-menu {
     list-style: none;
     padding: 0;
-    position: absolute;
+    margin: 0;
+    flex-grow: 1; /* isi ruang tengah */
 }
 
 .sidebar-menu li {
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
 .sidebar-menu a {
     display: block;
     padding: 8px 12px;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
     color: #e5e7eb;
+    font-size: 14px;
 }
 
 .sidebar-menu a:hover {
     background-color: #374151;
-    color: #c23030;
+    color: #ff0000;
 }
 
 .sidebar-footer {
-    font-size: 0.9rem;
-    color: #9ca3af;
+    margin-top: auto;
+    text-align: center;
 }
 
+/* Main content */
 .main-content {
     flex: 1;
-    padding: 40px;
+    padding: 30px;
     background-color: #f9fafb;
 }
 
 .page-title {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .card {
@@ -106,18 +101,78 @@ a {
     margin-top: 10px;
 }
 
+/* Footer */
 .footer {
-    position: flex;
-    padding: 5px;
+    padding: 10px;
     background-color: #111827;
     text-align: center;
     font-size: 14px;
     color: white;
 }
 
-.footer a {
-    color: #4b5563;
-    margin: 0 4px;
+/* Search bar */
+.search-form {  
+    display: flex;
+    gap: 10px;
 }
 
+.search-input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    flex: 1;
+}
 
+.search-btn {
+    padding: 8px 16px;
+    border: none;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Info pengguna */
+.info-box {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.info-box .user-name {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.info-box .user-email {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+/* Logout button */
+.logout-btn {
+    background-color: #ef4444;
+    border: none;
+    padding: 8px 16px;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%; /* biar full kotak */
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #dc2626;
+}

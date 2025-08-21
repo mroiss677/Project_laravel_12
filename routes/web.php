@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Konten;
+use App\Http\Middleware\RoleMiddleware;
+
 
 Route::get('/', function () {
     $konten = Konten::with('kategori')->latest()->get();
@@ -15,24 +17,36 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', function () {
+        return view('auth.login');
+    })->name('login');
+
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+
+Route::post('/proseslogin', [AuthController::class, 'proseslogin'])->name('proseslogin');
+
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect()->route('home');
-})->name('logout');
+})->middleware('auth')->name('logout');
 
-// ✅ Gunakan hanya ini untuk dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::post('/proseslogin', [AuthController::class, 'proseslogin'])->name('proseslogin');
+Route::middleware(['auth', RoleMiddleware::class.':admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('kategori', KategoriController::class);
+    Route::resource('konten', KontenController::class);
+});
 
-Route::resource('kategori', KategoriController::class);
-Route::resource('konten', KontenController::class);
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+Route::middleware(['auth', RoleMiddleware::class.':user'])->group(function () {
+    Route::get('/user/dashboard', function () {
+        return view('user.dashboard');
+    })->name('user.dashboard');
+});

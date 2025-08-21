@@ -134,3 +134,14 @@
     line-height: 1.6;
     text-align: center;
 }
+
+.btn-detail {
+        color: #0011ff;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .btn-detail:hover {
+        color: #0011ff;
+        text-decoration: underline;
+    }

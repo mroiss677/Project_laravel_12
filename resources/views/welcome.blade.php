@@ -54,22 +54,53 @@
                                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Konten"
                                     class="konten-gambar">
                             @endif
+
                             <h2 class="konten-judul">{{ $item->judul }}</h2>
                             <p class="konten-kategori">Kategori: {{ $item->kategori->nama }}</p>
-                            <p class="konten-isi">
+
+                            <!-- Teks ringkasan + lanjutan -->
+                            <span id="konten-{{ $item->id }}">
                                 {{ Str::limit(strip_tags($item->isi), 200, '...') }}
-                            </p>
+                            </span>
+
+                            <br>
+
+                            @if (strlen(strip_tags($item->isi)) > 200)
+                                <!-- Tombol Baca Selengkapnya -->
+                                <button class="btn-detail" id="btn-selengkapnya-{{ $item->id }}"
+                                    onclick="bacaSelengkapnya({{ $item->id }}, `{!! e(strip_tags($item->isi)) !!}`)">
+                                    Baca Selengkapnya.
+                                </button>
+
+                                <!-- Tombol Lebih Sedikit -->
+                                <button class="btn-detail" id="btn-sedikit-{{ $item->id }}"
+                                    onclick="lebihSedikit({{ $item->id }}, `{!! e(Str::limit(strip_tags($item->isi), 200, '...')) !!}`)"
+                                    style="display: none;">
+                                    Lebih Sedikit.
+                                </button>
+                            @endif
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </main>
-
-
     <div class="footer text-center py-2 text-sm">
         &copy; {{ date('Y') }} <strong>DESAKU</strong>. All rights reserved.
     </div>
+    <script>
+        function bacaSelengkapnya(id, fullText) {
+            document.getElementById(`konten-${id}`).innerHTML = fullText;
+            document.getElementById(`btn-selengkapnya-${id}`).style.display = "none";
+            document.getElementById(`btn-sedikit-${id}`).style.display = "inline-block";
+        }
+
+        function lebihSedikit(id, shortText) {
+            document.getElementById(`konten-${id}`).innerHTML = shortText;
+            document.getElementById(`btn-selengkapnya-${id}`).style.display = "inline-block";
+            document.getElementById(`btn-sedikit-${id}`).style.display = "none";
+        }
+    </script>
 </body>
 
 </html>
