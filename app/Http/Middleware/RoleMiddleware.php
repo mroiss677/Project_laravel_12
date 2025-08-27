@@ -3,25 +3,35 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $role
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function handle(Request $request, Closure $next, string $role): Response
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (!$request->user() || $request->user()->role !== $role) {
-            abort(403, 'Unauthorized.');
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->withErrors([
+                'auth' => 'Silakan login terlebih dahulu.'
+            ]);
         }
 
-        return $next($request);
+        $email = strtolower($user->email);
+
+        // ✅ Kalau admin, boleh akses SEMUA
+        if ($email === 'admin@gmail.com') {
+            return $next($request);
+        }
+
+        // ✅ Kalau role = user, pastikan bukan admin
+        if ($role === 'user' && $email !== 'admin@gmail.com') {
+            return $next($request);
+        }
+
+        return redirect()->route('home')->withErrors([
+            'auth' => 'Anda tidak punya akses ke halaman ini.'
+        ]);
     }
 }

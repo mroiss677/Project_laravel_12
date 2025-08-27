@@ -11,7 +11,7 @@ class KategoriController extends Controller
     {
         $query = Kategori::query();
 
-        // 🔍 Tambahkan fitur pencarian kategori (opsional)
+        
         if ($request->has('search') && $request->search != '') {
             $query->where('nama', 'like', '%' . $request->search . '%');
         }

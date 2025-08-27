@@ -28,12 +28,20 @@
             <ul class="sidebar-menu">
                 <li><a href="{{ route('dashboard') }}">🏠 Dashboard</a></li>
                 <li><a href="{{ route('konten.index') }}">📁 Konten</a></li>
-                <li><a href="{{ route('kategori.index') }}">📂 Kategori</a></li>
+
+                {{-- ✅ Hanya tampil untuk admin --}}
+                @if (Auth::check() && Auth::user()->email === 'admin@gmail.com')
+                    <li><a href="{{ route('kategori.index') }}">📂 Kategori</a></li>
+                @endif
             </ul>
+
             <div class="info-box">
                 <p class="user-name">👤 {{ Auth::user()->name }}</p>
-                <p class="user-email">{{ maskEmail(Auth::user()->email) }}</p>
+                <p class="user-email">
+                    {{ maskEmail(Auth::user()->email) }}
+                </p>
             </div>
+
 
             @php
                 function maskEmail($email)

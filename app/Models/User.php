@@ -6,56 +6,45 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property string $role
+ * @method static create(array $attributes)
+ */
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * Kolom yang bisa diisi massal
-     */
     protected $fillable = [
         'name',
-        'username', // wajib agar tidak error
+        'username',
         'email',
         'password',
-        'level', // ganti role menjadi level
+        'role', // ✅ ganti dari level ke role
     ];
 
-    /**
-     * Kolom yang disembunyikan
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Casting kolom
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
-    /**
-     * Helper cek apakah user adalah admin
-     */
+    // ✅ Helper untuk cek admin
     public function isAdmin(): bool
     {
-        return $this->level === 'admin';
+        return $this->role === 'admin';
     }
 
-    /**
-     * Helper cek apakah user biasa
-     */
+    // ✅ Helper untuk cek user biasa
     public function isUser(): bool
     {
-        return $this->level === 'user';
+        return $this->role === 'user';
     }
 
-    /**
-     * Relasi ke konten
-     */
     public function kontens()
     {
         return $this->hasMany(Konten::class);
