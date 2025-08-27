@@ -66,7 +66,7 @@ class KontenController extends Controller
 
     public function edit(Konten $konten)
     {
-        // ✅ User biasa tidak boleh edit konten orang lain
+       
         if (Auth::user()->email !== 'admin@gmail.com' && $konten->user_id !== Auth::id()) {
             return redirect()->route('konten.index')->with('error', 'Anda tidak boleh mengedit konten ini');
         }
@@ -77,7 +77,7 @@ class KontenController extends Controller
 
     public function update(Request $request, Konten $konten)
     {
-        // ✅ User biasa tidak boleh update konten orang lain
+        
         if (Auth::user()->email !== 'admin@gmail.com' && $konten->user_id !== Auth::id()) {
             return redirect()->route('konten.index')->with('error', 'Anda tidak boleh mengubah konten ini');
         }
@@ -92,7 +92,7 @@ class KontenController extends Controller
         $data = $request->only(['judul','isi','kategori_id']);
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama
+            
             if ($konten->gambar && Storage::disk('public')->exists($konten->gambar)) {
                 Storage::disk('public')->delete($konten->gambar);
             }
@@ -107,7 +107,7 @@ class KontenController extends Controller
 
     public function destroy(Konten $konten)
     {
-        // ✅ User biasa tidak boleh hapus konten orang lain
+        
         if (Auth::user()->email !== 'admin@gmail.com' && $konten->user_id !== Auth::id()) {
             return redirect()->route('konten.index')->with('error', 'Anda tidak boleh menghapus konten ini');
         }

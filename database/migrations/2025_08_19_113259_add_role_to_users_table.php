@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Tambahkan kolom role jika belum ada
+            
             if (!Schema::hasColumn('users', 'role')) {
                 $table->enum('role', ['admin', 'user'])->default('user')->after('password');
             }
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Hapus kolom role jika ada
+            
             if (Schema::hasColumn('users', 'role')) {
                 $table->dropColumn('role');
             }

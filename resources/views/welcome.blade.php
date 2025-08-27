@@ -58,7 +58,7 @@
                             <h2 class="konten-judul">{{ $item->judul }}</h2>
                             <p class="konten-kategori">Kategori: {{ $item->kategori->nama }}</p>
 
-                            <!-- Teks ringkasan + lanjutan -->
+                            
                             <span id="konten-{{ $item->id }}">
                                 {{ Str::limit(strip_tags($item->isi), 200, '...') }}
                             </span>
@@ -66,13 +66,13 @@
                             <br>
 
                             @if (strlen(strip_tags($item->isi)) > 200)
-                                <!-- Tombol Baca Selengkapnya -->
+                                
                                 <button class="btn-detail" id="btn-selengkapnya-{{ $item->id }}"
                                     onclick="bacaSelengkapnya({{ $item->id }}, `{!! e(strip_tags($item->isi)) !!}`)">
                                     Baca Selengkapnya.
                                 </button>
 
-                                <!-- Tombol Lebih Sedikit -->
+                                
                                 <button class="btn-detail" id="btn-sedikit-{{ $item->id }}"
                                     onclick="lebihSedikit({{ $item->id }}, `{!! e(Str::limit(strip_tags($item->isi), 200, '...')) !!}`)"
                                     style="display: none;">

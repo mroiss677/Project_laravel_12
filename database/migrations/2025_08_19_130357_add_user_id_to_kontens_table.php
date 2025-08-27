@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('kontens', function (Blueprint $table) {
-            // Pastikan kolom user_id belum ada
+            
             if (!Schema::hasColumn('kontens', 'user_id')) {
                 $table->unsignedBigInteger('user_id')->after('kategori_id');
 
-                // Tambahkan foreign key
+                
                 $table->foreign('user_id')
                       ->references('id')->on('users')
                       ->onDelete('cascade');

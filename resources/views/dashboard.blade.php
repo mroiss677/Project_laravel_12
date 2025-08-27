@@ -73,7 +73,7 @@
             <tbody>
                 @forelse($kontens as $index => $konten)
                     <tr>
-                        {{-- nomor urut tetap sesuai pagination --}}
+                        
                         <td>{{ $kontens->firstItem() + $index }}</td>
                         <td>{{ $konten->judul }}</td>
                         <td>{{ $konten->isi }}</td>
@@ -94,7 +94,7 @@
             </tbody>
         </table>
 
-        {{-- ✅ Pagination link --}}
+        
         <div class="pagination">
             {{ $kontens->links() }}
         </div>

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Konten;
+
 
 /**
  * @property string $role
@@ -20,7 +22,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'role', // ✅ ganti dari level ke role
+        'role', 
     ];
 
     protected $hidden = [
@@ -33,13 +35,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // ✅ Helper untuk cek admin
+    
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
 
-    // ✅ Helper untuk cek user biasa
+    
     public function isUser(): bool
     {
         return $this->role === 'user';

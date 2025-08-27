@@ -20,12 +20,12 @@ class RoleMiddleware
 
         $email = strtolower($user->email);
 
-        // ✅ Kalau admin, boleh akses SEMUA
+        
         if ($email === 'admin@gmail.com') {
             return $next($request);
         }
 
-        // ✅ Kalau role = user, pastikan bukan admin
+        
         if ($role === 'user' && $email !== 'admin@gmail.com') {
             return $next($request);
         }
